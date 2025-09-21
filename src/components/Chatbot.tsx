@@ -10,7 +10,7 @@ const Chatbot = () => {
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       role: 'assistant',
-      content: 'Hello! I\'m here to help you explore our artisan marketplace. Ask me about products, custom creations, or how to use the platform!',
+      content: 'Hello! I\'m KalaKriti AI, your creative assistant for the artisan marketplace. I can help you explore handcrafted products, create custom designs with AI, and navigate the platform. What would you like to create today?',
       timestamp: new Date()
     }
   ]);
@@ -76,9 +76,9 @@ const Chatbot = () => {
       <div className="fixed bottom-6 right-6 z-50">
         <Button
           onClick={() => setIsOpen(true)}
-          className="w-14 h-14 rounded-full shadow-elegant hover:shadow-glow transition-all duration-300 btn-primary"
+          className="w-16 h-16 rounded-full shadow-elegant hover:shadow-glow transition-all duration-300 btn-primary text-lg font-semibold"
         >
-          <MessageCircle className="w-6 h-6" />
+          <MessageCircle className="w-7 h-7" />
         </Button>
       </div>
     );
@@ -93,7 +93,7 @@ const Chatbot = () => {
         <div className="flex items-center justify-between p-4 border-b border-border">
           <div className="flex items-center space-x-2">
             <MessageCircle className="w-5 h-5 text-saffron" />
-            <span className="font-medium text-foreground">AI Assistant</span>
+            <span className="font-medium text-foreground">KalaKriti AI</span>
           </div>
           <div className="flex items-center space-x-1">
             <Button
