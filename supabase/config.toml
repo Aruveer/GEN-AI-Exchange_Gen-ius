@@ -2,3 +2,6 @@ project_id = "vjevkaxffguroyfypjkt"
 
 [functions.generate-vertex-ai-image]
 verify_jwt = false
+
+[functions.generate-gemini-response]
+verify_jwt = false

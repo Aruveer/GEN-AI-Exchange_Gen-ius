@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { MessageCircle, Send, X, Minimize2 } from 'lucide-react';
-import { geminiService, type ChatMessage } from '@/services/gemini';
+import { geminiService, type ChatMessage } from '@/services/geminiService';
 import { toast } from 'sonner';
 
 const Chatbot = () => {
