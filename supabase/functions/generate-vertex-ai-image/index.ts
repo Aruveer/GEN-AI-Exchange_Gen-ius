@@ -29,57 +29,14 @@ serve(async (req) => {
     // Enhanced prompt with style
     const enhancedPrompt = `${prompt}, ${style} style, high quality, detailed artwork`;
 
-    // Get access token using Google Auth Library approach
-    const jwtPayload = {
-      iss: credentials.client_email,
-      scope: 'https://www.googleapis.com/auth/cloud-platform',
-      aud: 'https://oauth2.googleapis.com/token',
-      exp: Math.floor(Date.now() / 1000) + 3600,
-      iat: Math.floor(Date.now() / 1000),
-    };
-
-    // Create JWT header
-    const jwtHeader = { alg: 'RS256', typ: 'JWT' };
-    
-    // Encode JWT
-    const encoder = new TextEncoder();
-    const headerB64 = btoa(JSON.stringify(jwtHeader)).replace(/=/g, '').replace(/\+/g, '-').replace(/\//g, '_');
-    const payloadB64 = btoa(JSON.stringify(jwtPayload)).replace(/=/g, '').replace(/\+/g, '-').replace(/\//g, '_');
-    
-    const unsignedToken = `${headerB64}.${payloadB64}`;
-    
-    // Import and sign with private key
-    const privateKeyPem = credentials.private_key
-      .replace('-----BEGIN PRIVATE KEY-----', '')
-      .replace('-----END PRIVATE KEY-----', '')
-      .replace(/\s/g, '');
-    
-    const privateKeyBuffer = Uint8Array.from(atob(privateKeyPem), c => c.charCodeAt(0));
-    
-    const privateKey = await crypto.subtle.importKey(
-      'pkcs8',
-      privateKeyBuffer,
-      { name: 'RSASSA-PKCS1-v1_5', hash: 'SHA-256' },
-      false,
-      ['sign']
-    );
-    
-    const signature = await crypto.subtle.sign(
-      'RSASSA-PKCS1-v1_5',
-      privateKey,
-      encoder.encode(unsignedToken)
-    );
-    
-    const signatureB64 = btoa(String.fromCharCode(...new Uint8Array(signature)))
-      .replace(/=/g, '').replace(/\+/g, '-').replace(/\//g, '_');
-    
-    const jwt = `${unsignedToken}.${signatureB64}`;
-
-    // Get access token
+    // Get access token using Google service account
     const tokenResponse = await fetch('https://oauth2.googleapis.com/token', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer&assertion=${jwt}`,
+      body: new URLSearchParams({
+        grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
+        assertion: await createJWT(credentials)
+      })
     });
 
     const tokenData = await tokenResponse.json();
@@ -153,3 +110,72 @@ serve(async (req) => {
     );
   }
 });
+
+// Helper function to create JWT
+async function createJWT(credentials: any): Promise<string> {
+  const header = {
+    alg: 'RS256',
+    typ: 'JWT',
+    kid: credentials.private_key_id
+  };
+  
+  const now = Math.floor(Date.now() / 1000);
+  const payload = {
+    iss: credentials.client_email,
+    scope: 'https://www.googleapis.com/auth/cloud-platform',
+    aud: 'https://oauth2.googleapis.com/token',
+    exp: now + 3600,
+    iat: now
+  };
+
+  const encoder = new TextEncoder();
+  
+  // Base64URL encode header and payload
+  const encodedHeader = base64UrlEncode(JSON.stringify(header));
+  const encodedPayload = base64UrlEncode(JSON.stringify(payload));
+  
+  const unsignedToken = `${encodedHeader}.${encodedPayload}`;
+  
+  // Import private key
+  const privateKeyPem = credentials.private_key;
+  const pemHeader = "-----BEGIN PRIVATE KEY-----";
+  const pemFooter = "-----END PRIVATE KEY-----";
+  const pemContents = privateKeyPem.substring(pemHeader.length, privateKeyPem.length - pemFooter.length);
+  
+  const binaryDerString = atob(pemContents);
+  const binaryDer = new Uint8Array(binaryDerString.length);
+  for (let i = 0; i < binaryDerString.length; i++) {
+    binaryDer[i] = binaryDerString.charCodeAt(i);
+  }
+  
+  const key = await crypto.subtle.importKey(
+    'pkcs8',
+    binaryDer,
+    {
+      name: 'RSASSA-PKCS1-v1_5',
+      hash: 'SHA-256'
+    },
+    false,
+    ['sign']
+  );
+  
+  // Sign the token
+  const signature = await crypto.subtle.sign(
+    'RSASSA-PKCS1-v1_5',
+    key,
+    encoder.encode(unsignedToken)
+  );
+  
+  const encodedSignature = base64UrlEncode(signature);
+  return `${unsignedToken}.${encodedSignature}`;
+}
+
+function base64UrlEncode(data: string | ArrayBuffer): string {
+  let base64: string;
+  if (typeof data === 'string') {
+    base64 = btoa(data);
+  } else {
+    base64 = btoa(String.fromCharCode(...new Uint8Array(data)));
+  }
+  return base64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '');
+}
