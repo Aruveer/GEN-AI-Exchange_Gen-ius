@@ -1,47 +1,17 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Sparkles, Palette, Zap, Send } from "lucide-react";
 import { toast } from "sonner";
-import { RunwareService, type GenerateImageParams } from "@/services/runware";
+import { vertexAIService, type GenerateImageParams } from "@/services/vertexAI";
 import Chatbot from "@/components/Chatbot";
-import ApiKeyInput from "@/components/ApiKeyInput";
 
 const Create = () => {
   const [description, setDescription] = useState("");
   const [selectedStyle, setSelectedStyle] = useState("");
   const [generatedImage, setGeneratedImage] = useState<string | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
-  const [runwareService, setRunwareService] = useState<RunwareService | null>(null);
-  const [apiKey, setApiKey] = useState<string>(() => {
-    return localStorage.getItem('runware_api_key') || '';
-  });
-
-  useEffect(() => {
-    if (apiKey && !runwareService) {
-      try {
-        const service = new RunwareService(apiKey);
-        setRunwareService(service);
-      } catch (error) {
-        console.error('Failed to initialize Runware service:', error);
-        toast.error('Failed to initialize AI service');
-      }
-    }
-  }, [apiKey, runwareService]);
-
-  const handleApiKeySet = (newApiKey: string) => {
-    setApiKey(newApiKey);
-    localStorage.setItem('runware_api_key', newApiKey);
-    
-    try {
-      const service = new RunwareService(newApiKey);
-      setRunwareService(service);
-    } catch (error) {
-      console.error('Failed to initialize Runware service:', error);
-      toast.error('Failed to initialize AI service');
-    }
-  };
 
   const styles = [
     { id: "traditional", name: "Traditional", icon: "🏺", description: "Classic Indian craftsmanship with intricate patterns and heritage designs" },
@@ -51,11 +21,6 @@ const Create = () => {
   ];
 
   const handleGenerateMockup = async () => {
-    if (!runwareService) {
-      toast.error("Please configure your API key first!");
-      return;
-    }
-
     if (!description.trim()) {
       toast.error("Please describe your dream product first!");
       return;
@@ -80,17 +45,10 @@ const Create = () => {
 
       const params: GenerateImageParams = {
         positivePrompt: `${enhancedPrompt}, high quality, detailed, beautiful, professional photography, studio lighting`,
-        model: "runware:100@1",
-        width: 1024,
-        height: 1024,
-        numberResults: 1,
-        outputFormat: "WEBP",
-        CFGScale: 7,
-        scheduler: "FlowMatchEulerDiscreteScheduler",
-        strength: 0.8
+        style: selectedStyle
       };
 
-      const result = await runwareService.generateImage(params);
+      const result = await vertexAIService.generateImage(params);
       setGeneratedImage(result.imageURL);
       
       toast.success("✨ Mockup generated successfully!", {
@@ -130,14 +88,9 @@ const Create = () => {
           </p>
         </div>
 
-        {/* API Key Configuration */}
-        {!runwareService && (
-          <div className="mb-8">
-            <ApiKeyInput onApiKeySet={handleApiKeySet} hasApiKey={!!runwareService} />
-          </div>
-        )}
-
-        {runwareService && (
+        {/* Main Content */}
+        <div className="max-w-6xl mx-auto">
+          {(
           <div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
           {/* Left Panel - Input */}
           <Card className="artisan-card">
@@ -269,6 +222,7 @@ const Create = () => {
           </Card>
           </div>
         )}
+        </div>
       </div>
       <Chatbot />
     </div>

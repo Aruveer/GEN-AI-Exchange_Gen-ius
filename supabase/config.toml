@@ -1,1 +1,4 @@
 project_id = "vjevkaxffguroyfypjkt"
+
+[functions.generate-vertex-ai-image]
+verify_jwt = false
