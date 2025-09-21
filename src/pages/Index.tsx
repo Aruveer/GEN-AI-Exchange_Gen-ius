@@ -36,11 +36,10 @@ const Index = () => {
         <div className="container mx-auto px-4 text-center">
           <div className="max-w-4xl mx-auto space-y-6 animate-fade-in-up">
             <h1 className="font-serif text-5xl md:text-7xl font-bold text-foreground">
-              Where <span className="text-transparent bg-gradient-primary bg-clip-text">AI</span> Meets{" "}
-              <span className="text-transparent bg-gradient-accent bg-clip-text">Artisan</span> Craft
+              Welcome to <span className="text-transparent bg-gradient-primary bg-clip-text">KalaKriti AI</span>
             </h1>
             <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Discover unique handcrafted treasures or co-create your dream product with AI-powered design and master artisans.
+              Where AI-powered creativity meets master artisan craftsmanship. Discover unique handcrafted treasures or co-create your dream product with our intelligent design platform.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
               <Button size="lg" className="btn-primary px-8 py-4 text-lg" asChild>

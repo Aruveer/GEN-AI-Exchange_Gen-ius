@@ -24,7 +24,7 @@ const Navigation = () => {
               <Sparkles className="w-5 h-5 text-primary-foreground" />
             </div>
             <span className="font-serif font-semibold text-xl text-foreground">
-              Artisan AI
+              KalaKriti AI
             </span>
           </Link>
 
