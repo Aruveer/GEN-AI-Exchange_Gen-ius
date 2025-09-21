@@ -1,73 +1,46 @@
-# Welcome to your Lovable project
+🌸 KalaKriti AI: An AI-Powered Global Marketplace for Artisans
+✨ Empowering Artisans, Preserving Tradition.
+Welcome to the heart of KalaKriti AI, a groundbreaking project that connects the timeless artistry of local Indian craftsmen with the boundless possibilities of modern technology. Our vision is to create a digital bridge, empowering artisans to share their cultural heritage with a global audience and secure a sustainable future for their craft.
 
-## Project info
+🎯 The Vision
+In a world of mass production, traditional Indian craftsmanship faces a disconnect. KalaKriti AI is our answer, a platform that doesn't just sell products but safeguards a legacy. We aim to provide a beautiful, authentic, and immersive digital experience for customers while equipping artisans with powerful AI tools to thrive in the digital age.
 
-**URL**: https://lovable.dev/projects/77496e87-9f77-4e16-a3a9-9c7652937b1d
+👥 User Roles
+Our solution is designed for a seamless experience across three primary user types:
 
-## How can I edit this code?
+Artisans: Local creators who showcase their work, manage AI-generated requests, and use intelligent assistants for business tasks.
 
-There are several ways of editing your application.
+Customers: Global buyers who discover unique products, co-create custom pieces using AI, and support artisans.
 
-**Use Lovable**
+Administrators: The guardians of the platform, ensuring cultural integrity, smooth logistics, and a safe community.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/77496e87-9f77-4e16-a3a9-9c7652937b1d) and start prompting.
+🛡️ Standout AI-Powered Features
+Our project is defined by its unique blend of human creativity and artificial intelligence.
 
-Changes made via Lovable will be committed automatically to this repo.
+1. Custom AI Co-Creation Engine
+This is our core value proposition. Customers can describe a product, choose a style, and our AI generates a unique visual mockup. This is not about replacing the artist; it's about a seamless collaboration where the artisan has the final say and brings the digital vision to life by hand.
 
-**Use your preferred IDE**
+2. The AI Guardian of Tradition 🌺
+A one-of-a-kind generative AI module that understands and respects cultural sensitivities. It acts as a digital guardian, gracefully negotiating with buyers when a request might be culturally inappropriate, and suggesting respectful, authentic alternatives.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+3. The Hype Points System
+A gamified, weekly-reset leaderboard that injects excitement and motivation into the community. Customers can award "Hype Points" to their favorite artisans, boosting their visibility and celebrating their success.
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+4. The NLP-Powered Language Bridge
+This feature provides real-time, multilingual translation within the chat interface, effortlessly breaking down language barriers and fostering a truly global community of creators and customers.
 
-Follow these steps:
+🎨 Theme & Branding
+The platform's visual identity is a tribute to traditional Indian art. We use a warm, earthy color palette with subtle hand-drawn motifs inspired by art forms like Madhubani and Warli to create an interface that is both culturally authentic and modern.
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+⚙️ Core Technology
+Generative AI: Powered by Google Cloud Vertex AI for creating AI-powered mockups and the AI Guardian.
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+Database: Cloud Firestore for secure, real-time data storage of users, products, and orders.
 
-# Step 3: Install the necessary dependencies.
-npm i
+Translation: Google Cloud Translation API for the language bridge feature.
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+Frontend: Built using a single-page application structure with HTML, CSS, and JavaScript.
 
-**Edit a file directly in GitHub**
+Styling: Utilizes Tailwind CSS for a clean, modern, and responsive user interface.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/77496e87-9f77-4e16-a3a9-9c7652937b1d) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+We are truly passionate about this project and are dedicated to making KalaKriti AI a reality. We would be grateful for the opportunity to bring this vision to life.
