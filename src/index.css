@@ -1,0 +1,159 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* AI-Powered Artisan Marketplace Design System
+Warm Indian-inspired palette with modern sophistication
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Base Colors - Warm beige backgrounds */
+    --background: 45 25% 96%;
+    --foreground: 15 15% 15%;
+
+    /* Cards - Slightly warmer white */
+    --card: 45 30% 98%;
+    --card-foreground: 15 15% 15%;
+
+    /* Popover */
+    --popover: 45 30% 98%;
+    --popover-foreground: 15 15% 15%;
+
+    /* Primary - Deep Maroon */
+    --primary: 348 65% 28%;
+    --primary-foreground: 45 25% 96%;
+
+    /* Secondary - Muted Saffron */
+    --secondary: 35 55% 75%;
+    --secondary-foreground: 15 15% 15%;
+
+    /* Muted - Warm neutral */
+    --muted: 35 20% 88%;
+    --muted-foreground: 15 15% 45%;
+
+    /* Accent - Soft Gold */
+    --accent: 42 85% 65%;
+    --accent-foreground: 15 15% 15%;
+
+    /* Destructive */
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 45 25% 96%;
+
+    /* Borders and inputs - Warm tones */
+    --border: 35 25% 85%;
+    --input: 35 25% 92%;
+    --ring: 348 65% 28%;
+
+    /* Custom Artisan Colors */
+    --saffron: 35 85% 68%;
+    --saffron-muted: 35 55% 75%;
+    --maroon: 348 65% 28%;
+    --maroon-light: 348 45% 45%;
+    --gold: 42 85% 65%;
+    --gold-light: 42 65% 85%;
+    --warm-beige: 45 25% 96%;
+    --warm-neutral: 35 20% 88%;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--maroon)), hsl(var(--maroon-light)));
+    --gradient-accent: linear-gradient(135deg, hsl(var(--saffron)), hsl(var(--gold)));
+    --gradient-subtle: linear-gradient(180deg, hsl(var(--warm-beige)), hsl(var(--warm-neutral)));
+
+    /* Shadows and glows */
+    --shadow-warm: 0 4px 20px -4px hsl(var(--maroon) / 0.15);
+    --shadow-gold: 0 0 20px hsl(var(--gold) / 0.3);
+    --glow-accent: 0 0 30px hsl(var(--saffron) / 0.4);
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+}
+
+@layer components {
+  .artisan-card {
+    @apply rounded-2xl bg-card border border-border shadow-warm transition-all duration-300 hover:shadow-xl hover:scale-[1.02];
+  }
+  
+  .hype-button {
+    @apply bg-gradient-accent text-foreground hover:shadow-gold transition-all duration-300 hover:animate-bounce-gentle;
+  }
+  
+  .btn-primary {
+    @apply bg-gradient-primary text-primary-foreground hover:shadow-warm;
+  }
+  
+  .masonry-item {
+    @apply animate-fade-in-up;
+  }
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
