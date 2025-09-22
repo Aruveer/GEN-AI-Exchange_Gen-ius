@@ -140,8 +140,16 @@ async function createJWT(credentials: any): Promise<string> {
   const privateKeyPem = credentials.private_key;
   const pemHeader = "-----BEGIN PRIVATE KEY-----";
   const pemFooter = "-----END PRIVATE KEY-----";
-  const pemContents = privateKeyPem.substring(pemHeader.length, privateKeyPem.length - pemFooter.length);
   
+  // Clean up the private key - remove headers, footers, and whitespace
+  let pemContents = privateKeyPem
+    .replace(pemHeader, '')
+    .replace(pemFooter, '')
+    .replace(/\s/g, '');
+  
+  console.log('Processing private key, length:', pemContents.length);
+  
+  // Decode base64 to binary
   const binaryDerString = atob(pemContents);
   const binaryDer = new Uint8Array(binaryDerString.length);
   for (let i = 0; i < binaryDerString.length; i++) {
